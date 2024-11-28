@@ -55,9 +55,6 @@ input[type="password"]::-ms-reveal {
 .bg-cart {
   background-color: #f5a623;
 }
-.bg-nen {
-  background: url(assets/nen.jpg) center no-repeat transparent;
-}
 
 .bgRecovey {
   background-image: url("./assets/Background.png");
