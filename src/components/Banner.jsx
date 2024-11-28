@@ -11,8 +11,6 @@ import image9 from '../assets/silder2.jpg';
 import image10 from '../assets/silder3.jpg';
 import image11 from '../assets/silder4.jpg';
 import image12 from '../assets/silder5.jpg';
-import left from '../assets/left-1.webp';
-import left1 from '../assets/left-2.webp';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6';
 
 const Banner = () => {
