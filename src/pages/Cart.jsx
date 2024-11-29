@@ -12,6 +12,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FaHeart, FaStar } from 'react-icons/fa';
 import displayCurrency from '../helpers/displayCurrency';
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 
 const Cart = () => {
@@ -79,40 +80,26 @@ const Cart = () => {
         return total;
     }, 0);
 
-    // const upQuantity = useCallback((productId, currentAmount, increment, max) => {
-    //     setCart((prevCart) => {
-    //         const updatedCart = prevCart.map((item) =>
-    //             item._id === productId
-    //                 ? { ...item, amount: increment ? Math.min(item.amount + 1, max) : Math.max(item.amount - 1, 1) }
-    //                 : item
-    //         );
-
-    //         localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-    //         if (increment && currentAmount >= max) {
-    //             toast.error("Số lượng không còn đủ");
-    //         }
-
-    //         return updatedCart;
-    //     });
-    // }, []);
-
-    const upQuantity = useCallback((productId, increment) => {
-        updateCart((prevCart) => {
-            const updatedCart = prevCart.map(item => {
-                if (item._id === productId) {
-                    const newAmount = increment
-                        ? Math.min(item.amount + 1, item.countInStock)
-                        : Math.max(item.amount - 1, 1);
-                    return { ...item, amount: newAmount };
-                }
-                return item;
+    const upQuantity = (id, type, max, selectedColor, selectedSize) => {
+        if (max) {
+            return toast.error("Số lượng không đủ");
+        }
+        if (type === "decrease") {
+            updateCart({
+                productId: id,
+                selectedColor: selectedColor,
+                selectedSize: selectedSize,
+                quantityChange: -1,
             });
-            console.log(updatedCart);
-            localStorage.setItem('cart', JSON.stringify(updatedCart));
-            return updatedCart;
-        });
-    }, []);
+        } else {
+            updateCart({
+                productId: id,
+                selectedColor: selectedColor,
+                selectedSize: selectedSize,
+                quantityChange: 1,
+            });
+        }
+    };
 
 
 

@@ -4,9 +4,6 @@ import brandMobile from "../helpers/bandProductCategoryMobile";
 import brandLaptop from "../helpers/bandProductCategoryLaptop";
 import brandIpad from "../helpers/bandProductCategoryTablet";
 import brandTelevision from "../helpers/brandProductCategoryTelevision";
-import brandRefrigerator from "../helpers/brandProductCategoryRefrigerator";
-import brandAir from "../helpers/brandProductCategoryAir";
-import brandEarphone from "../helpers/brandProductCategoryEarphone";
 import brandWatch from "../helpers/bandProductCategoryWatch";
 import SummaryAip from "../common";
 import translatedCategory from "../helpers/translatedCategory";
@@ -134,9 +131,6 @@ const CategoryProduct = () => {
     laptop: brandLaptop,
     ipad: brandIpad,
     televisions: brandTelevision,
-    refrigerator: brandRefrigerator,
-    air_conditioning: brandAir,
-    earphones: brandEarphone,
     watches: brandWatch,
   };
 

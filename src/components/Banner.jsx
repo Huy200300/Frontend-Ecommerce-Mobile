@@ -16,7 +16,6 @@ import { FaAngleRight, FaAngleLeft } from 'react-icons/fa6';
 const Banner = () => {
     const [currentImage, setCurrentImage] = useState(0);
     const desktopImage = [image1, image2, image3, image4, image5, image6, image7];
-    const title = ['iPhone 15 Pro Max', 'Galaxy S23 Utra', 'Laptop', 'Điều Hòa', 'Máy Lọc Nước', 'Điện Thoại', 'Mạng di động'];
     const mobileImage = [image8, image9, image10, image11, image12, image4, image7];
 
     const nextImage = useCallback(() => {
@@ -31,10 +30,6 @@ const Banner = () => {
         const interval = setInterval(nextImage, 5000);
         return () => clearInterval(interval);
     }, [nextImage]);
-
-    const handleTitleClick = (index) => {
-        setCurrentImage(index);
-    };
 
     return (
         <div className="max-w-screen-xl mx-auto rounded-md border-2">

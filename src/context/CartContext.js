@@ -63,17 +63,7 @@ export const CartProvider = ({ children }) => {
     );
 
     if (existingProduct) {
-      // Nếu sản phẩm đã có trong giỏ hàng, chỉ cập nhật số lượng
-      // const updatedCart = cart.map((item) =>
-      //   item._id === product._id &&
-      //   item.selectedColor === product.selectedColor &&
-      //   item.selectedStorage === product.selectedStorage
-      //     ? { ...item, amount: item.amount + count }
-      //     : item
-      // );
-      // setCart(updatedCart);
-      // localStorage.setItem("cart", JSON.stringify(updatedCart));
-      toast.error("Sản phẩm đã được cập nhật trong giỏ hàng");
+      return toast.error("Sản phẩm đã được cập nhật trong giỏ hàng");
     } else {
       // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới vào giỏ
       const updatedCart = [...cart, { ...product, amount: count }];
@@ -83,11 +73,32 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const updateCart = (newCart) => {
-    if (JSON.stringify(newCart) !== JSON.stringify(cart)) {
-      setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-    }
+  const updateCart = (updates) => {
+    setCart((prevCart) => {
+      const updatesArray = Array.isArray(updates) ? updates : [updates];
+      const updatedCart = prevCart
+        .map((item) => {
+          const update = updatesArray.find((u) => {
+            const isProductMatch = u.productId === item._id;
+            const isColorMatch =
+              !u.selectedColor || u.selectedColor === item.selectedColor;
+            const isSizeMatch =
+              !u.selectedSize || u.selectedSize === item.selectedStorage;
+
+            return isProductMatch && isColorMatch && isSizeMatch;
+          });
+          if (update) {
+            const newQuantity = item.amount + update.quantityChange;
+            return newQuantity > 0 ? { ...item, amount: newQuantity } : null;
+          }
+
+          return item;
+        })
+        .filter(Boolean);
+
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
 
   const removeFromCart = (productIds) => {

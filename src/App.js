@@ -17,10 +17,12 @@ import { FavoritesProvider } from "./context/FavoritesContext";
 import { SelectedProductsProvider } from "./context/SelectedProducts";
 import { ProductCompareProvider } from "./context/ProductCompareContext";
 import CompareProductsModal from "./components/CompareProductsModal";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
   const dispatch = useDispatch();
   const [cartProductCount, setCartProductCount] = useState(0);
+  const [loading, setLoading] = useState(true); // Ban đầu đặt trạng thái loading là true
   const [dataUser, setDataUser] = useState([]);
 
   const fetchUserDetails = async () => {
@@ -50,40 +52,52 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchUserDetails();
-    fetchUserAddToCart();
+    const initializeApp = async () => {
+      await fetchUserDetails();
+      await fetchUserAddToCart();
+      setTimeout(() => setLoading(false), 1000);
+    };
+
+    initializeApp();
   }, []);
 
   return (
     <>
-      <Context.Provider
-        value={{
-          fetchUserDetails,
-          cartProductCount,
-          dataUser,
-          fetchUserAddToCart,
-          updateCartProductCount,
-        }}
-      >
-        <TabProvider>
-          <ToastContainer position="top-right" />
-          <ProductCompareProvider>
-            <FavoritesProvider>
-              <SelectedProductsProvider>
-                <CartProvider>
-                  <Header />
-                  <main id="main-content" className="min-h-[calc(100vh-140px)]">
-                    <Outlet />
-                  </main>
-                  <CompareProductsModal />
-                  <Footer />
-                </CartProvider>
-              </SelectedProductsProvider>
-            </FavoritesProvider>
-          </ProductCompareProvider>
-          <ScrollToTopButton />
-        </TabProvider>
-      </Context.Provider>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <Context.Provider
+          value={{
+            fetchUserDetails,
+            cartProductCount,
+            dataUser,
+            fetchUserAddToCart,
+            updateCartProductCount,
+          }}
+        >
+          <TabProvider>
+            <ToastContainer position="top-right" />
+            <ProductCompareProvider>
+              <FavoritesProvider>
+                <SelectedProductsProvider>
+                  <CartProvider>
+                    <Header />
+                    <main
+                      id="main-content"
+                      className="min-h-[calc(100vh-140px)]"
+                    >
+                      <Outlet />
+                    </main>
+                    <CompareProductsModal />
+                    <Footer />
+                  </CartProvider>
+                </SelectedProductsProvider>
+              </FavoritesProvider>
+            </ProductCompareProvider>
+            <ScrollToTopButton />
+          </TabProvider>
+        </Context.Provider>
+      )}
     </>
   );
 }

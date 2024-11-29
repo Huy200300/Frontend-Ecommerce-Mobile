@@ -12,7 +12,7 @@ const VerticalCardProduct = ({ category, heading }) => {
     const scrollElement = useRef()
     const { addToCart } = useCart();
     const { addFavorite, favorites, removeFavorite } = useFavorites();
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const loadingList = new Array(10).fill(null)
     const navigate = useNavigate();
 

@@ -16,6 +16,7 @@ import FavoritesDropdown from './FavoritesDropdown';
 import SearchDropdown from './SearchDropdown';
 import productCategory from '../helpers/productCategory';
 import { BiChevronDown } from 'react-icons/bi';
+import SidebarMenu from './SidebarMenu';
 
 const Header = () => {
     const [menuDisplay, setMenuDisplay] = useState(false);
@@ -30,7 +31,7 @@ const Header = () => {
     const location = useLocation();
     const [selectedCategory, setSelectedCategory] = useState('Danh Mục');
     const [isHovering, setIsHovering] = useState(false);
-
+    const [isHoveringLabel, setIsHoveringlabel] = useState(null);
     const handleCategorySelect = (category) => {
         setSelectedCategory(category.label);
         setIsHovering(false);
@@ -65,7 +66,7 @@ const Header = () => {
 
     const fetchProductSuggestions = async (query) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/search?query=${query}`, {
+            const response = await fetch(`https://backend-ecommerce-mobile.vercel.app/api/search?query=${query}`, {
                 method: 'GET',
                 credentials: "include"
             });
@@ -106,6 +107,13 @@ const Header = () => {
         setIsOpenT(false)
     }
 
+    const productCategories = [
+        { id: 1, title: "Apple (iPhone)", items: ["iPhone 16 Series", "iPhone 15 Series", "iPhone 14 Series"] },
+        { id: 2, title: "Samsung", items: ["Galaxy AI", "Galaxy S Series", "Galaxy A Series"] },
+        { id: 3, title: "Xiaomi", items: ["Poco Series", "Xiaomi Series", "Redmi Note Series"] },
+        { id: 4, title: "Thương hiệu khác", items: ["Tecno", "Realme", "Vivo", "ZTE"] },
+    ];
+
     return (
         <div>
             <header>
@@ -119,7 +127,7 @@ const Header = () => {
                         <ul className="header-links pull-right flex gap-4 text-xs">
                             {
                                 user?._id ? (
-                                    <li><Link to={""} className='flex items-center gap-2'><FaUser className='text-red-500' />Chào {user?.name}</Link></li>
+                                    <li><Link to={"/"} className='flex items-center gap-2'><FaUser className='text-red-500' />Chào {user?.name}</Link></li>
                                 ) : (
                                     <li><Link to={"/login"} className='flex items-center gap-2'><FaUser className='text-red-500' />Tài Khoản</Link></li>
                                 )
@@ -145,7 +153,10 @@ const Header = () => {
                                     <form className='relative flex' onSubmit={(e) => e.preventDefault()}>
                                         <div
                                             className="relative inline-block bg-white rounded-l-full text-nowrap"
-                                            onMouseEnter={() => setIsHovering(true)}
+                                            onMouseEnter={() => {
+                                                setIsHovering(true)
+
+                                            }}
                                             onMouseLeave={() => setIsHovering(false)}
                                         >
                                             <button className="input-select flex justify-center items-center font-semibold rounded-s-full h-10 py-0 px-3.5 outline-none">
@@ -154,19 +165,46 @@ const Header = () => {
                                             </button>
 
                                             {isHovering && (
-                                                <ul className="absolute z-50 left-0 mt-[1px] w-48 bg-white border border-gray-300 rounded-s-2xl shadow-lg">
+                                                <ul className="absolute group z-50 left-0 w-[700px] bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
                                                     {productCategory.map((category) => (
                                                         <li
                                                             key={category.id}
-                                                            className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                                                            className="relative w-96 group flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 transition-colors"
                                                             onClick={() => handleCategorySelect(category)}
+                                                            onMouseEnter={() => setIsHoveringlabel(category.id)}
+                                                            onMouseLeave={() => setIsHoveringlabel(null)}
                                                         >
-                                                            {category.label}
+                                                            <span className="mr-3 text-xl text-blue-500">{category.icon}</span>
+                                                            <span className="text-gray-700 font-medium">{category.label}</span>
+                                                            {isHoveringLabel === category.id && (
+                                                                <div className="absolute left-56 top-0 bg-white shadow-lg border rounded-md w-64 mt-2 z-50">
+                                                                    <div className="grid grid-cols-1 gap-4 p-4">
+                                                                        {category?.subCategories?.map((subCategory) => (
+                                                                            <div key={subCategory.id}>
+                                                                                <h3 className="font-semibold text-gray-800 mb-2">{subCategory.title}</h3>
+                                                                                <ul className="space-y-1">
+                                                                                    {subCategory.items.map((item, index) => (
+                                                                                        <li
+                                                                                            key={index}
+                                                                                            className="text-gray-600 hover:text-blue-500 cursor-pointer transition"
+                                                                                        >
+                                                                                            {item}
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                            )}
                                                         </li>
                                                     ))}
                                                 </ul>
                                             )}
+                                           
+
                                         </div>
+                                        {/* <SidebarMenu /> */}
                                         <SearchDropdown
                                             suggestions={filteredSuggestions}
                                             search={search}

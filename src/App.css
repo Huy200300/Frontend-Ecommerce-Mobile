@@ -92,6 +92,11 @@ input[type="password"]::-ms-reveal {
 
 }
 
+.group:hover .dropdown-menu {
+  display: block;
+}
+
+
 /* Định nghĩa lớp cho mô tả */
 .icon-wrapper {
     position: relative;

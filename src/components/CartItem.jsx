@@ -124,7 +124,7 @@ const CartItem = ({
                         <div className='flex gap-3 justify-center items-center'>
                             <button
                                 disabled={product?.amount === 1}
-                                onClick={() => updateQuantity(product?._id, false)}
+                                onClick={() => updateQuantity(product?._id, "decrease", product?.amount === 1, product.selectedColor, product.selectedStorage)}
                                 className='text-xl text-gray-500 hover:text-gray-900 cursor-pointer transition-all ease-in-out'>
                                 <FaMinus className='text-lg' />
                             </button>
@@ -132,7 +132,7 @@ const CartItem = ({
                                 {product?.amount}
                             </div>
                             <button
-                                onClick={() => updateQuantity(product?._id, true)}
+                                onClick={() => updateQuantity(product?._id, "increase", product?.amount === product?.countInStock, product?.selectedColor, product?.selectedStorage)}
                                 className='text-xl text-gray-500 hover:text-gray-900 cursor-pointer transition-all ease-in-out'
                             // disabled={product?.amount >= product?.countInStock}
                             >

@@ -14,7 +14,7 @@ const NewProductList = () => {
     const scrollElement = useRef()
     const { addToCart } = useCart();
     const { addFavorite, favorites, removeFavorite } = useFavorites();
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const loadingList = new Array(10).fill(null)
     const { closeCompareModal, addToCompare } = useProductCompare();
 
@@ -38,7 +38,6 @@ const NewProductList = () => {
             }));
             setData(productsWithReviews)
         } else if (dataApi?.error) {
-            setLoading(false)
             toast(dataApi?.message)
         }
     }
@@ -71,7 +70,6 @@ const NewProductList = () => {
             }));
             setData(productsWithReviews)
         } else if (dataApi?.error) {
-            setLoading(false)
             toast(dataApi?.message)
         }
     }
@@ -114,17 +112,17 @@ const NewProductList = () => {
                     </div>
                     <div className="relative group inline-block">
                         <button onClick={() => handleOnChange("mobiles")} className="relative font-semibold text-current focus:outline-none after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#D10024] after:transition-all after:duration-200 group-hover:after:w-full focus:after:w-full">
-                            Smartphones
+                            Điện thoại
                         </button>
                     </div>
                     <div className="relative group inline-block">
                         <button onClick={() => handleOnChange("ipad")} className="relative font-semibold text-current focus:outline-none after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#D10024] after:transition-all after:duration-200 group-hover:after:w-full focus:after:w-full">
-                            Ipad
+                            Máy tính bảng
                         </button>
                     </div>
                     <div className="relative group inline-block">
-                        <button onClick={() => handleOnChange("televisions")} className="relative font-semibold text-current focus:outline-none after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#D10024] after:transition-all after:duration-200 group-hover:after:w-full focus:after:w-full">
-                            Televisions
+                        <button onClick={() => handleOnChange("watches")} className="relative font-semibold text-current focus:outline-none after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#D10024] after:transition-all after:duration-200 group-hover:after:w-full focus:after:w-full">
+                            Đồng hồ
                         </button>
                     </div>
                 </div>

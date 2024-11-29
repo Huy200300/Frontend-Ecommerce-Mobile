@@ -10,7 +10,7 @@ import { FaStar } from 'react-icons/fa'
 const HorizontalCardProduct = ({ category, heading }) => {
   const navigate = useNavigate();
   const [data, setdata] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const loadingList = new Array(7).fill(null)
   const scrollElement = useRef()
 
