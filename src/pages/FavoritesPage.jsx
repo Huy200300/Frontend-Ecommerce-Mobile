@@ -203,7 +203,7 @@ const FavoritesPage = () => {
         </div>
       )}
 
-      {compareList.length > 0 && (
+      {compareList?.length > 0 && (
         <div className="mt-4 p-4 border rounded-lg">
           <h3 className="font-bold mb-2">Products to Compare:</h3>
           <ul>

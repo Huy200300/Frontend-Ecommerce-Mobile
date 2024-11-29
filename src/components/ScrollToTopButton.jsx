@@ -60,7 +60,7 @@ const ScrollToTopButton = () => {
                 {showContact && (
                     <div className="relative">
                         {items.map((item, index) => {
-                            const { x, y } = calculatePosition(index, items.length);
+                            const { x, y } = calculatePosition(index, items?.length);
                             return (
                                 <a
                                     key={index}

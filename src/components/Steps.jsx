@@ -31,7 +31,7 @@ const Steps = ({ totalAmount, data = [] }) => {
                                     {description}
                                 </div>
                             </div>
-                            {value < data.length && (
+                            {value < data?.length && (
                                 <div className={`flex-auto border-t-4 ${value < step ? 'border-green-500' : 'border-gray-300'}`} style={{ margin: '0 1rem' }}></div>
                             )}
                         </React.Fragment>

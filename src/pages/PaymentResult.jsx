@@ -30,7 +30,7 @@ const PaymentResult = () => {
                 .filter(item => cart.some(cartItem => cartItem._id === item._id))
                 .map(item => item._id);
 
-            if (idsToRemove.length > 0) {
+            if (idsToRemove?.length > 0) {
                 removeFromCart(idsToRemove);
             }
 
@@ -65,7 +65,7 @@ const PaymentResult = () => {
                                 <h2 className="text-lg md:text-xl text-green-600 font-semibold mb-4">Thanh Toán Thành Công</h2>
                                 <p className="text-gray-700 font-semibold mb-6">Giao dịch của bạn đã thành công. Cảm ơn bạn đã mua hàng!</p>
 
-                                {orderedProductsRef.current.length > 0 && (
+                                {orderedProductsRef?.current?.length > 0 && (
                                     <>
                                         <h3 className="text-lg font-semibold mb-4">Sản phẩm bạn đã đặt:</h3>
                                         <ul className="mb-6">
@@ -76,13 +76,13 @@ const PaymentResult = () => {
                                                         console.log(product)
                                                     }
                                                     {
-                                                        product?.colors.length > 0 ? <img src={product.selectedColorImage} alt={product.name} className="w-16 h-16 mr-4" /> :
+                                                        product?.colors?.length > 0 ? <img src={product.selectedColorImage} alt={product.name} className="w-16 h-16 mr-4" /> :
                                                             <img src={product.productImage[0]} alt={product.name} className="w-16 h-16 mr-4" />
                                                     }
                                                     <div>
                                                         <p className="font-semibold">{product.productName}</p>
                                                         {
-                                                            product?.colors.length > 0 ? <>
+                                                            product?.colors?.length > 0 ? <>
                                                                 <p className="text-gray-500">Màu sắc: {product.selectedColor}</p>
                                                                 
                                                             </> :

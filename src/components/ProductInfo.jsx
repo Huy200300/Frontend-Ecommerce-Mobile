@@ -50,7 +50,7 @@ const ProductInfo = ({ data, productId, handleCompare, handleAddToCart, handleFa
 
     useEffect(() => {
         const sum = dataReview?.reduce((acc, curr) => acc + curr?.rating, 0);
-        if (dataReview.length > 0) {
+        if (dataReview?.length > 0) {
             setAverageRating(sum / dataReview?.length);
         } else {
             setAverageRating(0);
@@ -77,7 +77,7 @@ const ProductInfo = ({ data, productId, handleCompare, handleAddToCart, handleFa
         const filteredColors = data.colors.filter(color => color.size === size);
         setAvailableColors(filteredColors);
 
-        if (filteredColors.length > 0) {
+        if (filteredColors?.length > 0) {
             const firstAvailableColor = filteredColors[0];
             setSelectedColor(firstAvailableColor.colorName);
             updatePrice(size, firstAvailableColor.colorName);
@@ -165,9 +165,9 @@ const ProductInfo = ({ data, productId, handleCompare, handleAddToCart, handleFa
                         <div className="flex mt-4">
                             <div className="mr-4 flex flex-col gap-3">
                                 {
-                                    data?.colors.length > 0 && (
+                                    data?.colors?.length > 0 && (
                                         <>
-                                            {uniqueSizes.filter(size => size !== undefined && size !== null).length > 0 && (
+                                            {uniqueSizes.filter(size => size !== undefined && size !== null)?.length > 0 && (
                                                 <div className="flex gap-3 items-center mt-2">
                                                     <label className="block text-sm font-semibold capitalize">Dung lượng</label>
                                                     <div className="flex gap-2">
@@ -196,7 +196,7 @@ const ProductInfo = ({ data, productId, handleCompare, handleAddToCart, handleFa
                                                                 }`}
                                                             onClick={() => handleColorChange(color.colorName)}
                                                         >
-                                                            {color.colorImages && color.colorImages.length > 0 ? (
+                                                            {color?.colorImages && color?.colorImages?.length > 0 ? (
                                                                 <img
                                                                     src={color.colorImages[0]}
                                                                     alt={color.colorName}

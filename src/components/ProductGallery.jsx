@@ -11,7 +11,7 @@ const ProductGallery = ({ images = [] }) => {
     const itemsToShow = 3;
 
     useEffect(() => {
-        if (images.length > 0) {
+        if (images?.length > 0) {
             setSelectedImage(images[0]);
             setStartIndex(0);
         } else {
@@ -20,14 +20,14 @@ const ProductGallery = ({ images = [] }) => {
     }, [images]);
 
     const displayImages = () => {
-        if (images.length === 0) return [];
+        if (images?.length === 0) return [];
 
         let indices = [];
         let index = startIndex;
 
         for (let i = 0; i < itemsToShow; i++) {
             indices.push(index);
-            index = (index + 1) % images.length;
+            index = (index + 1) % images?.length;
         }
 
         return indices.map(i => images[i]);
@@ -35,7 +35,7 @@ const ProductGallery = ({ images = [] }) => {
 
     const handleScrollUp = () => {
         setStartIndex(prevIndex => {
-            let newIndex = (prevIndex - 1 + images.length) % images.length;
+            let newIndex = (prevIndex - 1 + images?.length) % images?.length;
             setSelectedImage(images[newIndex]);
             return newIndex;
         });
@@ -43,7 +43,7 @@ const ProductGallery = ({ images = [] }) => {
 
     const handleScrollDown = () => {
         setStartIndex(prevIndex => {
-            const newIndex = (prevIndex + 1) % images.length;
+            const newIndex = (prevIndex + 1) % images?.length;
             setSelectedImage(images[newIndex]);
             return newIndex;
         });
@@ -73,7 +73,7 @@ const ProductGallery = ({ images = [] }) => {
                 <button
                     className="text-gray-500 mb-2 md:block hidden"
                     onClick={handleScrollUp}
-                    disabled={images.length <= 1}
+                    disabled={images?.length <= 1}
                 >
                     <FaAngleUp size={24} className="bg-white p-1 rounded-full shadow-md" />
                 </button>
@@ -103,7 +103,7 @@ const ProductGallery = ({ images = [] }) => {
                 <button
                     className="text-gray-500 mt-2 md:block hidden"
                     onClick={handleScrollDown}
-                    disabled={images.length <= 1}
+                    disabled={images?.length <= 1}
                 >
                     <FaAngleDown size={24} className="bg-white p-1 rounded-full shadow-md" />
                 </button>

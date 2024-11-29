@@ -113,7 +113,7 @@ const Cart = () => {
     }, []);
 
     const selectAllProducts = useCallback(() => {
-        if (selectedProducts.length === cart.length) {
+        if (selectedProducts?.length === cart?.length) {
             setSelectedProducts([]);
         } else {
             const allProductIds = cart.map(item => item._id);
@@ -213,7 +213,7 @@ const Cart = () => {
                                             </div>
                                         ))}
                                     </div>
-                                    {visibleProducts < favorites.length && (
+                                    {visibleProducts < favorites?.length && (
                                         <div className="flex justify-center mt-4">
                                             <button
                                                 onClick={handleShowMore}

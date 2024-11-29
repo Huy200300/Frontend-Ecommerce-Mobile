@@ -106,7 +106,7 @@ const PaymentPage = () => {
     }, [data?.fullAddress]);
 
     const [selectedAddress, setSelectedAddress] = useState(() => {
-        if (!dataShipping || dataShipping.length === 0) {
+        if (!dataShipping || dataShipping?.length === 0) {
             return null;
         }
         const defaultAddr = dataShipping.find(address => address.defaultAddress);
@@ -115,7 +115,7 @@ const PaymentPage = () => {
     });
 
     useEffect(() => {
-        if (!dataShipping || dataShipping.length === 0) {
+        if (!dataShipping || dataShipping?.length === 0) {
             setSelectedAddress(null);
             return;
         }

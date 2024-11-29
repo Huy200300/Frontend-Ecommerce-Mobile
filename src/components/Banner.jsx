@@ -19,12 +19,12 @@ const Banner = () => {
     const mobileImage = [image8, image9, image10, image11, image12, image4, image7];
 
     const nextImage = useCallback(() => {
-        setCurrentImage((prev) => (desktopImage.length - 1 > prev ? prev + 1 : 0));
-    }, [desktopImage.length]);
+        setCurrentImage((prev) => (desktopImage?.length - 1 > prev ? prev + 1 : 0));
+    }, [desktopImage?.length]);
 
     const prevImage = useCallback(() => {
-        setCurrentImage((prev) => (prev !== 0 ? prev - 1 : desktopImage.length - 1));
-    }, [desktopImage.length]);
+        setCurrentImage((prev) => (prev !== 0 ? prev - 1 : desktopImage?.length - 1));
+    }, [desktopImage?.length]);
 
     useEffect(() => {
         const interval = setInterval(nextImage, 5000);

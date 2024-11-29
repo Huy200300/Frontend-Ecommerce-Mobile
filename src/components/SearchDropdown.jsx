@@ -44,11 +44,11 @@ const SearchDropdown = ({ suggestions, search, onSearchChange, onSearchSelect })
         const value = event.target.value;
         setInputValue(value);
         onSearchChange(value);
-        setIsVisible(value && suggestions.length > 0);
+        setIsVisible(value && suggestions?.length > 0);
     };
 
     const handleFocus = () => {
-        if (inputValue && suggestions.length > 0) {
+        if (inputValue && suggestions?.length > 0) {
             setIsVisible(true);
         }
     };
@@ -76,7 +76,7 @@ const SearchDropdown = ({ suggestions, search, onSearchChange, onSearchSelect })
                 <IoIosSearch />
             </div>
 
-            {isVisible && suggestions.length > 0 && (
+            {isVisible && suggestions?.length > 0 && (
                 <ul className='absolute top-full left-0 w-full bg-white border border-gray-300 rounded-md shadow-lg mt-1 z-50'>
                     {suggestions.map((suggestion) => (
                         <li

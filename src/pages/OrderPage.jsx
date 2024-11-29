@@ -359,7 +359,7 @@ const OrderPage = () => {
                           <p className="mb-2 md:text-lg text-base text-gray-600">Mã giao dịch: {item?.transactionId}</p>
                         </div>
                         <div className="flex gap-4 font-bold text-base items-center">
-                          {!(item?.statusHistory?.length > 0 && item?.statusHistory[item?.statusHistory.length - 1]?.orderStatus === 'Cancelled') && (
+                          {!(item?.statusHistory?.length > 0 && item?.statusHistory[item?.statusHistory?.length - 1]?.orderStatus === 'Cancelled') && (
                             <button
                               className="flex capitalize items-center gap-2 border border-blue-500 bg-blue-500 text-white hover:text-blue-500 rounded-full px-4 py-2 hover:bg-white transition-colors duration-200"
                               onClick={(e) => handleOrderDetails(e, item?.orderId)}
@@ -387,7 +387,7 @@ const OrderPage = () => {
                           </tr>
                         </thead>
                         <tbody className='font-bold'>
-                          {item?.productDetails && item.productDetails.length > 0 && item.productDetails.map((product, productIndex) => (
+                          {item?.productDetails && item?.productDetails?.length > 0 && item.productDetails.map((product, productIndex) => (
                             <tr key={product.id} className="border-t">
                               <td className="p-2 text-center border border-gray-300">{productIndex + 1}</td>
                               <td className="p-2 text-sm max-w-xs break-words text-center border border-gray-300">
@@ -414,7 +414,7 @@ const OrderPage = () => {
                               <td className="p-2 text-center border border-gray-300">{displayCurrency(product.sellingPrice)}</td>
                               {productIndex === 0 && (
                                 <>
-                                  <td className="p-2 text-center border border-gray-300" rowSpan={item.productDetails.length}>
+                                  <td className="p-2 text-center border border-gray-300" rowSpan={item?.productDetails?.length}>
                                     <div className="">
                                       <div className="flex flex-col items-center justify-center border-gray-300 p-2 h-full">
                                         <span>
@@ -423,7 +423,7 @@ const OrderPage = () => {
                                       </div>
                                     </div>
                                   </td>
-                                  <td className="p-2 text-center border border-gray-300" rowSpan={item.productDetails.length}>
+                                  <td className="p-2 text-center border border-gray-300" rowSpan={item?.productDetails?.length}>
                                     {item.status === "paid" ? 'Trả rồi' : 'Chưa trả'}
                                   </td>
                                 </>
@@ -436,7 +436,7 @@ const OrderPage = () => {
                             <td className="p-2 text-center border border-gray-300" ></td>
                             <td className="p-2 text-center border border-gray-300">
                               <span>
-                                {item.shippingDetails && item.shippingDetails.length > 0 && displayCurrency(item.shippingDetails.map(i => i.shipping))}
+                                {item?.shippingDetails && item?.shippingDetails?.length > 0 && displayCurrency(item.shippingDetails.map(i => i.shipping))}
                               </span>
                             </td>
                             <td className="p-2 text-center border border-gray-300" colSpan={2}>

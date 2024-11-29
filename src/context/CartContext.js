@@ -117,7 +117,7 @@ export const CartProvider = ({ children }) => {
         cart,
         addToCart,
         removeFromCart,
-        cartLength: cart.length,
+        cartLength: cart?.length,
         updateCart,
       }}
     >

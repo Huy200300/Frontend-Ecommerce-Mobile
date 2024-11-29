@@ -76,7 +76,7 @@ const CategoryProduct = () => {
     setSelectedBrands(updatedBrands);
 
     const params = new URLSearchParams({ category });
-    if (updatedBrands.length > 0) {
+    if (updatedBrands?.length > 0) {
       params.set("brand", updatedBrands.join("&"));
     } else {
       params.delete("brand");

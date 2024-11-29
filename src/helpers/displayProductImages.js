@@ -6,7 +6,7 @@ export const displayProductImages = (
   setFullScreenImage,
   handleDeleteProductImage
 ) => {
-  if (productImages.length > 0) {
+  if (productImages?.length > 0) {
     return (
       <div className="flex items-center gap-2">
         {productImages.map((imageUrl, index) => (

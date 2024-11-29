@@ -22,7 +22,7 @@ const ReviewList = ({ productId, loading, user }) => {
 
     useEffect(() => {
         const sum = reviews?.reduce((acc, curr) => acc + curr?.rating, 0);
-        if (reviews.length > 0) {
+        if (reviews?.length > 0) {
             setAverageRating(sum / reviews?.length);
         } else {
             setAverageRating(0);
