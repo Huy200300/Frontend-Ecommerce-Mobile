@@ -22,16 +22,17 @@ import LoadingSpinner from "./components/LoadingSpinner";
 function App() {
   const dispatch = useDispatch();
   const [cartProductCount, setCartProductCount] = useState(0);
-  const [loading, setLoading] = useState(true); // Ban đầu đặt trạng thái loading là true
+  const [loading, setLoading] = useState(false);
   const [dataUser, setDataUser] = useState([]);
 
   const fetchUserDetails = async () => {
+    setLoading(true);
     const dataReponse = await fetch(SummaryAip.current_user.url, {
       method: SummaryAip.method,
       credentials: "include",
     });
+    setLoading(false);
     const dataApi = await dataReponse.json();
-
     if (dataApi?.success) {
       setDataUser(dataApi?.data);
       dispatch(setUserDetails(dataApi?.data));
@@ -39,10 +40,12 @@ function App() {
   };
 
   const fetchUserAddToCart = async () => {
+    setLoading(true);
     const dataResponse = await fetch(SummaryAip.count_add_to_cart.url, {
       method: SummaryAip.count_add_to_cart.method,
       credentials: "include",
     });
+    setLoading(false);
     const dataApi = await dataResponse.json();
     setCartProductCount(dataApi?.data?.count);
   };
